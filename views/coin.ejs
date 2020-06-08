@@ -1,0 +1,105 @@
+<%-  include("partials/header") -%>
+
+<div class="container coin-container">
+    <h1 class="coin-header"><img src="<%= summary.image %>" height="46" width="46"> <%= summary.name %> (<%= summary.symbol.toUpperCase() %>)</h1>
+    
+    <div class="chart-container">
+        <canvas id="canvas" width="800" height="500"></canvas>
+    </div>
+    
+    
+    <script>
+        var coinData = <%-JSON.stringify(reformCharData)%>;
+    
+        var scatterChartData = {
+        datasets: [{
+            data: coinData
+        }]
+        };
+        $.each(scatterChartData.datasets, function(i, dataset) {
+        dataset.borderColor = 'rgb(0,0,255)';
+        dataset.backgroundColor = 'rgba(0,0,255,0.1)';
+        dataset.pointBorderColor = 'rgb(0,0,255)';
+        dataset.pointBackgroundColor = 'rgb(0,0,255)';
+        dataset.pointBorderWidth = 1;
+        dataset.showLine = true;
+        });
+    
+    
+        var ctx = document.getElementById("canvas").getContext("2d");
+        window.myScatter = Chart.Scatter(ctx, {
+        data: scatterChartData,
+        options: {
+            legend: {
+            display: false
+            },
+            title: {
+            display: false,
+            text: 'Chart.js Scatter Chart'
+            },
+            scales: {
+            xAxes: [{
+                position: 'bottom',
+                gridLines: {
+                zeroLineColor: "rgba(0,255,0,1)"
+                },
+                ticks: {
+                userCallback: function(label, index, labels) {
+                    return moment(label).format("DD/MM/YY");
+                }
+    
+    
+                },
+                scaleLabel: {
+                display: true,
+                labelString: 'Date (DD/MM//YY)'
+                }
+            }],
+            yAxes: [{
+                position: 'left',
+                gridLines: {
+                zeroLineColor: "rgba(0,255,0,1)"
+                },
+                scaleLabel: {
+                display: true,
+                labelString: 'Price (USD)'
+                }
+            }]
+            }
+        }
+        });
+    </script>
+    
+    <table class="table coin-table">
+        <thead>
+            <tr>
+                <th>Current price</th>
+                <th>Market cap</th>
+                <th>Total volume</th>
+                <th>Circulating supply</th>
+                <th>High (24 hours)</th>
+                <th>Low (24 hours)</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td><%= summary.current_price %></td>
+                <td><%= summary.market_cap %></td>
+                <td><%= summary.total_volume %></td>
+                <td><%= summary.circulating_supply %></td>
+                <td><%= summary.high_24h %></td>
+                <td><%= summary.low_24h %></td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <h3 class="description-heading">About <%= summary.name %></h3>
+    <p class="description-text"><%=description %></p>
+</div>
+
+
+    
+
+
+<%- include("partials/footer") -%>

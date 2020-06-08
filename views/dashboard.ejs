@@ -1,0 +1,40 @@
+<%- include("partials/header") -%>
+    <div class="container">
+    
+    <% if(watchList) { %>
+        <table class="table dashboard-table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Change</th>
+                    <th>Market Cap</th>
+                    <th>Watch</th>
+                </tr>
+            </thead>
+            <tbody>
+            <% watchList.forEach((coin, i)=> { %>
+                <tr class="clickable-row" data-href="/price/<%=coin.id%>">
+                    <td><%= i+1 %></td>
+                    <td><img src="<%= coin.image %>" height="36" width="36"> <span><%=coin.name %></span> <span><%=coin.symbol.toUpperCase() %></span></td>
+                    <td><%= coin.current_price %></td>
+                    <td><%= coin.price_change_percentage_24h_in_currency ? coin.price_change_percentage_24h_in_currency.toFixed(2): "N/A" %></td>
+                    <td><%= coin.market_cap %></td>
+                    <td><button class="btn btn-primary">Watch</button></td>
+                </tr> 
+            <% }); %>
+            </tbody>
+        </table>
+    <%} else {%>
+        <div class="empty-dashboard">
+            <h3>Welcome to your dashboard!</h3>
+            <p>Here you will be able to view and manage cryptocurrencies that have been added to your watch list.</p>
+            <form action="/price/page/1" method="GET">
+                    <button class="btn btn-primary">Start adding curriencies!</button>
+            </form>
+        </div>
+    <% } %>
+    
+    </div>
+<%- include("partials/footer") -%>

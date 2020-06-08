@@ -1,0 +1,89 @@
+
+/* Home */
+
+.navbar-bg {
+    background-color:rgb(22, 82, 240);
+}
+
+.navbar-brand {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+}
+
+.navbar-brand, .nav-link {
+    color: white;
+}
+
+.navbar-brand:hover {
+    color: white;
+}
+
+.nav-link:hover {
+    color: rgba(255,255,255,0.8)
+}
+
+.jumbotron {
+    color: white;
+    background-color: rgb(22, 82, 240);
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+}
+
+.jumbotron-heading {
+    font-weight: 500;
+}
+
+.jumbotron-description {
+    font-weight: 300;
+}
+
+#home-table {
+    margin: auto;
+}
+
+/* Price */
+
+#price-header {
+    margin: 2% auto;
+}
+
+/* Coin */
+
+canvas {
+    width: 100% !important;
+    max-width: 800px;
+    height: 100% !important;
+    max-height: 500px; 
+}
+
+.coin-container {
+}
+
+.coin-header {
+    margin: 2% auto;
+}
+
+.coin-table {
+    margin: 2% auto;
+}
+
+/* Dashboard */
+
+.empty-dashboard {
+    margin: 10% auto;
+    text-align: center
+}
+
+.description-heading {
+    margin-bottom: 2%; 
+}
+
+.dashboard-table {
+    margin-top: 3%;
+}
+
+/* Sign in & Sign up */
+
+.form-container {
+    margin: 10% auto;
+}

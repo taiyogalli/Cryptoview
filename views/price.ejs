@@ -1,0 +1,39 @@
+<%-  include("partials/header") -%>
+<div class="container">
+    <h1 id="price-header">Currencies</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Change</th>
+                <th>Market Cap</th>
+                <th>Watch</th>
+            </tr>
+        </thead>
+        <tbody>
+        <% priceTable.forEach((coin, i)=> { %>
+            <tr class="clickable-row" data-href="/price/<%=coin.id%>">
+                <td><%= i+1+(currentPage-1)*50 %></td>
+                <td><img src="<%= coin.image %>" height="36" width="36"> <span><%=coin.name %></span> <span><%=coin.symbol.toUpperCase() %></span></td>
+                <td><%= coin.current_price %></td>
+                <td><%= coin.price_change_percentage_24h_in_currency ? coin.price_change_percentage_24h_in_currency.toFixed(2): "N/A" %></td>
+                <td><%= coin.market_cap %></td>
+                <td><form action="/dashboard" method="POST"><button class="btn btn-primary" name="coinId" value="<%=coin.id%>">Add</button></form></td>
+            </tr> 
+        <% }); %>
+        </tbody>
+    </table>
+
+    <script type="text/javascript">
+        jQuery(document).ready(function($) {
+            $(".clickable-row").click(function() {
+                window.location = $(this).data("href");
+            });
+        });
+    </script>
+</div>
+
+<%- include("partials/footer") -%>

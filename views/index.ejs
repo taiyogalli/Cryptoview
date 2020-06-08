@@ -1,0 +1,43 @@
+<%-  include("partials/header") -%>
+
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-4 jumbotron-heading">Real time and historical crypto data</h1>
+        <p class="lead jumbotron-description">Cryptoview is the easiest place to view cryptocurrency prices and historical data</p>
+        <form action="/signup" method="GET">
+            <button class="btn btn-success btn-lg" type="submit">Get started</button>
+        </form>
+    </div>
+</div>
+
+<div class="container">
+<table id="home-table" class="table">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Change</th>
+            <th>Chart</th>
+        </tr>
+    </thead>
+    <tbody>
+    <% homeTable.forEach((coin, i)=> { %>
+        <tr>
+            <td><%= i+1 %></td>
+            <td><img src="<%= coin.image %>" height="36" width="36"> <span><%=coin.name %></span> <span><%=coin.symbol.toUpperCase() %></span></td>
+            <td><%= coin.current_price %></td>
+            <td><%= coin.price_change_percentage_24h_in_currency.toFixed(2)%>%</td>
+            <td><span class="<%=coin.symbol%>-sparkline"></span></td>
+        </tr>
+
+        <script>
+            $(".<%=coin.symbol%>-sparkline").sparkline(Array(<%= coin.sparkline_in_7d.price%>).splice(140));
+        </script>    
+    <% }); %>
+    </tbody>
+</table>
+</div>
+     
+
+<%- include("partials/footer") -%>
